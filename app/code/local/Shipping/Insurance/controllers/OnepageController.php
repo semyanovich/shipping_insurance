@@ -24,8 +24,8 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
                         'quote'   => $this->getOnepage()->getQuote()));
                 $this->getOnepage()->getQuote()->collectTotals();
                 $this->_prepareDataJSON($result);
-                if(Mage::helper('shipping_insurance')->isEnabled()){
-                    if(Mage::helper('shipping_insurance')->isNewStep()) {
+                if (Mage::helper('shipping_insurance')->isEnabled()){
+                    if (Mage::helper('shipping_insurance')->isNewStep()) {
                         $result['goto_section'] = 'shippinginsurance';
                     } else {
                         $data = $this->getRequest()->getPost('has_insurance', '');
@@ -72,7 +72,7 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
                 );
             } else {
                 $result['goto_section'] = 'shippinginsurance';
-                if(! $data){
+                if (! $data){
                     $result['error'] = $this->__('Unable to set Shipping Insurance.');
                 }
             }
@@ -84,17 +84,20 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
 
     private function getExtShippingInfo($quote, $data)
     {
-        if($amount = Mage::helper('shipping_insurance')->getAmount()) {
+        if ($amount = Mage::helper('shipping_insurance')->getAmount()) {
             if (Mage::helper('shipping_insurance')->getType() === '2') {
                 $amount =  $quote->getSubtotal() * $amount / 100;
             }
         }
-        if ($this->extShippingInfo = unserialize($quote->getExtShippingInfo())) {
-            if($data) {
-                $this->extShippingInfo = array_merge($this->extShippingInfo, array('shipping_insurance' => $amount));
-            } elseif(array_key_exists('shipping_insurance', $this->extShippingInfo)) {
-                unset($this->extShippingInfo['shipping_insurance']);
-            }
+        $ext_shipping_info = unserialize($quote->getExtShippingInfo());
+        if (isset($ext_shipping_info['shipping_insurance'])) {
+            $this->extShippingInfo = array_merge($ext_shipping_info, array('shipping_insurance' => $amount));
+        } else {
+            $this->extShippingInfo = array('shipping_insurance' => $amount);
+        }
+
+        if ($data !== "1"){
+            unset($this->extShippingInfo['shipping_insurance']);
         }
     }
 }

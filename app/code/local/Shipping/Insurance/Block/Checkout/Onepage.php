@@ -19,7 +19,7 @@ class Shipping_Insurance_Block_Checkout_Onepage extends Mage_Checkout_Block_Onep
         $stepCodes = $this->_getStepCodes();
         $step = array_search('shipping_method', $stepCodes);
 
-        if($is_enable && $is_new_step && $step) {
+        if ($is_enable && $is_new_step && $step) {
             $stepCodes = array_merge(array_slice($stepCodes, 0, ++$step), ['shippinginsurance'], array_slice($stepCodes, $step));
         }
 

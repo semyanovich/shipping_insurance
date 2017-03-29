@@ -46,13 +46,13 @@ class Shipping_Insurance_Model_Sales_Quote_Address_Total_Insurance extends Mage_
     public function fetch(Mage_Sales_Model_Quote_Address $address)
     {
         if ($address->getAddressType() == 'shipping') {
-            $amount = $this->getInsuranceAmount($address);
-            $address->addTotal(array(
-                'code' => $this->getCode(),
-                'title' => Mage::helper('shipping_insurance')->__('Shipping Insurance'),
-                'value' => $amount
-            ));
-
+            if ($amount = $this->getInsuranceAmount($address)) {
+                $address->addTotal(array(
+                    'code' => $this->getCode(),
+                    'title' => Mage::helper('shipping_insurance')->__('Shipping Insurance'),
+                    'value' => $amount
+                ));
+            }
         }
         return $this;
     }
@@ -64,7 +64,7 @@ class Shipping_Insurance_Model_Sales_Quote_Address_Total_Insurance extends Mage_
     public function getInsuranceAmount(Mage_Sales_Model_Quote_Address $address)
     {
         $quote = $address->getQuote();
-        if(empty($this->shipping_info)) {
+        if (empty($this->shipping_info)) {
             $this->setShippingInsurance($quote);
         }
         return $this->shipping_amount;
@@ -77,7 +77,7 @@ class Shipping_Insurance_Model_Sales_Quote_Address_Total_Insurance extends Mage_
      */
     protected function setShippingInsurance(Mage_Sales_Model_Quote $quote)
     {
-        if($shipping_info = $quote->getExtShippingInfo()) {
+        if ($shipping_info = $quote->getExtShippingInfo()) {
             $shipping_info = unserialize($shipping_info);
             if (array_key_exists('shipping_insurance', $shipping_info) && $shipping_info['shipping_insurance']) {
                 $this->shipping_amount = $shipping_info['shipping_insurance'];
