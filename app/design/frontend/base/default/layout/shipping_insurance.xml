@@ -5,17 +5,15 @@
             <action method="setTemplate">
                 <template>insurance/onepage.phtml</template>
             </action>
-            <block type="insurance/checkout_onepage_shippinginsurance" name="shippinginsurance" template="insurance/onepage/shippinginsurance.phtml" />
+            <block type="insurance/checkout_onepage_shippinginsurance" name="shippinginsurance" template="insurance/onepage/shippinginsurance.phtml">
+                <block type="insurance/checkout_onepage_shippinginsurance" name="insurance.checkbox" template="insurance/onepage/shipping/method/checkbox.phtml"/>
+            </block>
             <block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method" as="shipping_method">
                 <action method="setTemplate">
                     <template>insurance/onepage/shipping/method.phtml</template>
                 </action>
                 <block type="insurance/checkout_onepage_shipping_method" name="insurance.checkbox" template="insurance/onepage/shipping/method/checkbox.phtml"/>
-                <!--<block type="insurance/onepage_shipping_method_insurance" name="insurance.checkbox" template="insurance/onepage/shipping_method/checkbox.phtml"/>-->
             </block>
-            <reference name="ccheckout.onepage.shipping_method">
-                <block type="insurance/checkout_onepage_shipping_method" name="insurance.checkbox" template="insurance/onepage/shipping/method/checkbox.phtml"/>
-            </reference>
         </reference>
     </checkout_onepage_index>
 </layout>
