@@ -1,0 +1,29 @@
+<form id="shippinginsurance-form" action="">
+    <fieldset>
+        <?php $amount = $this->helper('shipping_insurance')->getInsurance();?>
+        <ul class="form-list">
+            <li id="shippinginsurance">
+                <fieldset>
+                    <label for="has_insurance"><strong></strong><?php echo $this->__('Use Shipping Insurance') ?><strong></label>
+                    <input type="checkbox" name="has_insurance"
+                           title="<?php echo $this->__('Enable Shipping Insurance') ?>" value="1"  checked="checked" class="checkbox" />
+                </fieldset>
+            </li>
+        </ul>
+        <?php echo $this->__('Insurance: ' . $this->helper('checkout')->formatPrice($amount)) ?>
+<!--        --><?php //$_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
+<!--        --><?php //echo $this->helper('checkout')->formatPrice($_incl + Mage::helper('weee')->getRowWeeeTaxInclTax($_item)); ?>
+        <div class="buttons-set" id="shippinginsurance-buttons-container">
+            <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="shippinginsurance.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+            <span class="please-wait" id="shippinginsurance-please-wait" style="display:none;">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading next step...') ?>" title="<?php echo $this->__('Loading next step...') ?>" class="v-middle" /> <?php echo $this->__('Loading next step...') ?>
+        </span>
+        </div>
+    </fieldset>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var shippinginsurance = new ShippingInsurance('shippinginsurance-form','<?php echo $this->getUrl('checkout/onepage/saveShippingInsurance') ?>');
+    var ShippingInsuranceForm = new VarienForm('shippinginsurance-form');
+    //]]>
+</script>
