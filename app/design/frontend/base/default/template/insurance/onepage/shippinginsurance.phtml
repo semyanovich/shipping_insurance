@@ -1,7 +1,6 @@
 <form id="shippinginsurance-form" action="">
     <fieldset>
         <?php echo $this->getChildHtml('insurance.checkbox') ?>
-        <?php echo $this->__('Insurance: ' . $this->helper('checkout')->formatPrice($amount)) ?>
         <div class="buttons-set" id="shippinginsurance-buttons-container">
             <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="shippinginsurance.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
             <span class="please-wait" id="shippinginsurance-please-wait" style="display:none;">
