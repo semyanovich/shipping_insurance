@@ -15,11 +15,11 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
 
 
     public function getAmount(){
-        return (Mage::getStoreConfig(self::XML_PATCH . 'amount', Mage::app()->getStore()) == 1);
+        return Mage::getStoreConfig(self::XML_PATCH . 'amount', Mage::app()->getStore());
     }
 
     public function getType(){
-        return (Mage::getStoreConfig(self::XML_PATCH . 'type', Mage::app()->getStore()) == 1);
+        return Mage::getStoreConfig(self::XML_PATCH . 'type', Mage::app()->getStore());
     }
 
 

@@ -26,7 +26,7 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
                 $this->getOnepage()->getQuote()->collectTotals();
                 $this->_prepareDataJSON($result);
                 if(Mage::helper('shipping_insurance')->isEnabled()){
-                    if(Mage::helper('shipping_insurance')->isNewTab()) {
+                    if(Mage::helper('shipping_insurance')->isNewStep()) {
                         $result['goto_section'] = 'shippinginsurance';
                     } else {
                         $quote = $this->getOnepage()->getQuote();
