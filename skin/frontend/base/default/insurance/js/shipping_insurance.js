@@ -115,4 +115,3 @@ ShippingMethod.prototype.nextStep =  function(transport){
 
     checkout.setShippingMethod();
 }
-
