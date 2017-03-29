@@ -47,13 +47,12 @@ class Shipping_Insurance_Model_Sales_Quote_Address_Total_Insurance extends Mage_
     {
         if ($address->getAddressType() == 'shipping') {
             $amount = $this->getInsuranceAmount($address);
-            if($amount) {
-                $address->addTotal(array(
-                    'code' => $this->getCode(),
-                    'title' => Mage::helper('shipping_insurance')->__('Shipping Insurance'),
-                    'value' => $amount
-                ));
-            }
+            $address->addTotal(array(
+                'code' => $this->getCode(),
+                'title' => Mage::helper('shipping_insurance')->__('Shipping Insurance'),
+                'value' => $amount
+            ));
+
         }
         return $this;
     }

@@ -3,7 +3,6 @@ require_once 'Mage/Checkout/controllers/OnepageController.php';
 
 class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageController
 {
-    private $extShippingInfo = array();
 
     /**
      * Shipping method save action
@@ -29,6 +28,7 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
                     if(Mage::helper('shipping_insurance')->isNewStep()) {
                         $result['goto_section'] = 'shippinginsurance';
                     } else {
+                        $data = $this->getRequest()->getPost('has_insurance', '');
                         $quote = $this->getOnepage()->getQuote();
                         $this->getExtShippingInfo($quote, $data);
                         $result = $quote->setExtShippingInfo(serialize($this->extShippingInfo));
@@ -95,8 +95,6 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
             } elseif(array_key_exists('shipping_insurance', $this->extShippingInfo)) {
                 unset($this->extShippingInfo['shipping_insurance']);
             }
-        } elseif($data) {
-            $this->extShippingInfo = array('shipping_insurance' => $data);
         }
     }
 }
