@@ -85,7 +85,7 @@ class Shipping_Insurance_OnepageController extends Mage_Checkout_OnepageControll
     private function getExtShippingInfo($quote, $data)
     {
         if($amount = Mage::helper('shipping_insurance')->getAmount()) {
-            if (Mage::helper('shipping_insurance')->getType() == 1) {
+            if (Mage::helper('shipping_insurance')->getType() === '2') {
                 $amount =  $quote->getSubtotal() * $amount / 100;
             }
         }
