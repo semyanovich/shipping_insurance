@@ -1,6 +1,9 @@
 <form id="shippinginsurance-form" action="">
     <fieldset>
-        <?php echo $this->getChildHtml('insurance.checkbox') ?>
+        <?php if ($this->helper('shipping_insurance')->isNewStep() && $this->helper('shipping_insurance')->isEnabled()) {
+            echo $this->getChildHtml('insurance.checkbox');
+        }
+        ?>
         <div class="buttons-set" id="shippinginsurance-buttons-container">
             <button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="shippinginsurance.save()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
             <span class="please-wait" id="shippinginsurance-please-wait" style="display:none;">

@@ -10,7 +10,7 @@
     <div id="onepage-checkout-shipping-method-additional-load">
         <?php echo $this->getChildHtml('additional') ?>
     </div>
-    <?php if(! $this->helper('shipping_insurance')->isNewStep()):?>
+    <?php if(! $this->helper('shipping_insurance')->isNewStep() && $this->helper('shipping_insurance')->isEnabled()):?>
         <div>
             <?php echo $this->getChildHtml('insurance.checkbox') ?>
         </div>
